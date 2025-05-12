@@ -1,11 +1,9 @@
-import React, { useContext } from "react";
-import { TaskContext } from "../context/TaskContext";
-import Swal from "sweetalert2";
+import React from "react";
 import FilterBar from "./FilterBar";
-import * as XLSX from "xlsx";
+import { useTaskList } from "../hooks/useTaskList";
 
 const TaskList = () => {
-  const { tasks, deleteTask, toggleComplete } = useContext(TaskContext);
+  const { tasks, toggleComplete, handleDeleteTask, handleDownloadTasks } = useTaskList();
 
   if (tasks.length === 0)
     return (
@@ -13,35 +11,6 @@ const TaskList = () => {
         No tasks added yet.
       </p>
     );
-
-  const handleDeleteTask = (id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        deleteTask(id);
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
-      }
-    });
-  };
-
-  const handleDownloadTasks = () => {
-    const worksheet = XLSX.utils.json_to_sheet(tasks);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "reportName");
-
-    XLSX.writeFile(workbook, "tasks.xlsx");
-  };
 
   return (
     <>
