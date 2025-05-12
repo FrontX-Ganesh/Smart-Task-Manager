@@ -7,7 +7,7 @@ function App() {
   const [activeTab, setActiveTab] = useState("add");
 
   return (
-    <div>
+    <div className="max-w-7xl m-auto">
       <header className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold">Smart Task Manager</h1>
       </header>
@@ -38,7 +38,6 @@ function App() {
       {activeTab === "add" && <TaskForm />}
       {activeTab === "list" && (
         <>
-          
           <TaskList />
         </>
       )}
