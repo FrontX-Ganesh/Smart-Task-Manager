@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TaskForm from "./components/TaskForm";
 import TaskList from "./components/TaskList";
-import FilterBar from "./components/FilterBar";
 import Header from "./layout/Header";
 import Tabs from "./components/Tabs";
 
